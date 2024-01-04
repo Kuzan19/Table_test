@@ -7,7 +7,7 @@
 1. Клонируйте репозиторий.
    
 ```
-https://github.com/Kuzan19/Table_test
+git clone https://github.com/Kuzan19/Table_test
 cd Table
 ```
 
