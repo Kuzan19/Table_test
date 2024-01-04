@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %} {% endblock %}
+
+{% block content %}
+{% if users %}
+
+<form action="#" method="get" id="sortProduct">
+  <div class="box sort pull-right">
+    <span>Сортировка:</span>
+    <button value="Сортировка" class="dropdown-toggle" type="submit" data-toggle="dropdown" id="menu2">
+     <span class="dropdown-label">По умолчанию</span>
+    </button>
+   <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
+      <input type="submit" name="orderby" value="name" title="А-Я">
+      <input type="submit" name="orderby" value="-name" title="Я-А">
+      <input type="submit" name="orderby" value="age" title="По возрасту (по возрастанию)">
+      <input type="submit" name="orderby" value="-age" title="По возрасту (по убыванию)">
+   </ul>
+  </div>
+</form>
+
+<form action="#" method="get" id="filterProduct">
+  <div class="box sort pull-right">
+    <span>Сортировка:</span>
+   <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
+       <button type="submit" name="filter_by"  title="Все"> По умолчанию </button>
+       <button type="submit" name="filter_by" value="Муж." title="Только мужчины"> Только Мужчины </button>
+   </ul>
+  </div>
+</form>
+
+<table>
+
+<tr>
+  <th>Пользователи</th>
+  <th>Имя</th>
+  <th>Фамилия</th>
+  <th>Полных лет</th>
+  <th>Пол</th>
+  <th>Телефон</th>
+  <th>Тип крови</th>
+  </tr>
+
+    {% for user in users %}
+ <tr>
+  <td>{{user.id}}</td>
+  <td>{{user.name}}</td>
+  <td>{{user.surname}}</td>
+  <td>{{user.age}}</td>
+  <td>{{user.gender}}</td>
+  <td>{{user.phone_number}}</td>
+  <td>{{user.blood_type}}</td>
+ </tr>
+    {% endfor %}
+
+</table>
+{% if is_paginated %}
+        <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+    {% endif %}
+{% else %}
+    <p>No users found!!! :(</p>
+{% endif %}
+
+{% endblock %}
