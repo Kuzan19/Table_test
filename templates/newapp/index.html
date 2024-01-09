@@ -5,30 +5,24 @@
 {% block content %}
 {% if users %}
 
-<form action="#" method="get" id="sortProduct">
+<form action="" method="get" id="filterProduct">
   <div class="box sort pull-right">
-    <span>Сортировка:</span>
-    <button value="Сортировка" class="dropdown-toggle" type="submit" data-toggle="dropdown" id="menu2">
-     <span class="dropdown-label">По умолчанию</span>
-    </button>
-   <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
-      <input type="submit" name="orderby" value="name" title="А-Я">
-      <input type="submit" name="orderby" value="-name" title="Я-А">
-      <input type="submit" name="orderby" value="age" title="По возрасту (по возрастанию)">
-      <input type="submit" name="orderby" value="-age" title="По возрасту (по убыванию)">
+    <span>Фильтрация:</span>
+   <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
+       <button type="submit" name="filter_by"  title="Все"> Все пользователи </button>
+       <button type="submit" name="filter_by" value="Муж." title="Только мужчины"> Только Мужчины </button>
+       <button type="submit" name="filter_by" value="Жен." title="Только мужчины"> Только Мужчины </button>
    </ul>
   </div>
 </form>
 
-<form action="#" method="get" id="filterProduct">
-  <div class="box sort pull-right">
+<div class="box sort pull-right">
     <span>Сортировка:</span>
-   <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
-       <button type="submit" name="filter_by"  title="Все"> По умолчанию </button>
-       <button type="submit" name="filter_by" value="Муж." title="Только мужчины"> Только Мужчины </button>
-   </ul>
-  </div>
-</form>
+    <a href="{% url 'table-views-page' %}"><button type="submit">Сбросить сортировку</button></a>
+    <a href="{% url 'sorted-name-table-views-page' %}"><button type="submit">Сортировать по имени</button></a>
+    <a href="{% url 'sorted-age-table-views-page' %}"><button type="submit">Сортировать по возрасту</button></a>
+</div>
+<br>
 
 <table>
 
@@ -59,8 +53,8 @@
         <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <a href="?page=1&orderby={{ordering}}&filter_by={{filtering}}">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}&filter_by={{filtering}}">previous</a>
         {% endif %}
 
         <span class="current">
@@ -68,8 +62,8 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <a href="?page={{ page_obj.next_page_number }} &filter_by={{filtering}}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }} &filter_by={{filtering}}">last &raquo;</a>
         {% endif %}
     </span>
 </div>
