@@ -22,6 +22,11 @@ class TableView(ListView):
             context['filtering'] = self.request.GET.get('filter_by')
         else:
             context['filtering'] = ''
+        if self.request.path:
+            now_path = self.request.path
+            context['path'] = now_path
+        else:
+            context['path'] = ''
         return context
 
     def get_queryset(self):

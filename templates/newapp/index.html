@@ -5,25 +5,25 @@
 {% block content %}
 {% if users %}
 
-<form action="" method="get" id="filterProduct">
-  <div class="box sort pull-right">
-    <span>Фильтрация:</span>
-   <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
-       <button type="submit" name="filter_by"  title="Все"> Все пользователи </button>
-       <button type="submit" name="filter_by" value="Муж." title="Только мужчины"> Только Мужчины </button>
-       <button type="submit" name="filter_by" value="Жен." title="Только мужчины"> Только Мужчины </button>
-   </ul>
-  </div>
-</form>
+
 
 <div class="box sort pull-right">
     <span>Сортировка:</span>
-    <a href="{% url 'table-views-page' %}"><button type="submit">Сбросить сортировку</button></a>
-    <a href="{% url 'sorted-name-table-views-page' %}"><button type="submit">Сортировать по имени</button></a>
-    <a href="{% url 'sorted-age-table-views-page' %}"><button type="submit">Сортировать по возрасту</button></a>
+    <a href="{% url 'table-views-page' %}?page={{ page_obj.number }}&filter_by={{filtering}}"><button type="submit">Сбросить сортировку</button></a>
+    <a href="{% url 'sorted-name-table-views-page' %}?page={{ page_obj.number }}&filter_by={{filtering}}"><button type="submit">Сортировать по имени</button></a>
+    <a href="{% url 'sorted-age-table-views-page' %}?page={{ page_obj.number }}&filter_by={{filtering}}"><button type="submit">Сортировать по возрасту</button></a>
 </div>
+
 <br>
 
+<div class="box filtr pull-right">
+    <span>Фильтрация:</span>
+    <a href="{{path}}?page={{ page_obj.number }}&filter_by="><button type="submit"> Все пользователи </button></a>
+    <a href="{{path}}?page={{ page_obj.number }}&filter_by=Муж."><button type="submit"> Только Мужчины </button></a>
+    <a href="{{path}}?page={{ page_obj.number }}&filter_by=Жен."><button type="submit"> Только Женщины </button></a>
+</div>
+
+<br>
 <table>
 
 <tr>

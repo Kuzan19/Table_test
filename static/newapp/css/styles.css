@@ -25,3 +25,7 @@ text-align: left;
     display: flex
     margin-right: 10px
 }
+
+.box filtr pull-right {
+    display: right;
+}
