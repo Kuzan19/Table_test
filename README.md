@@ -16,7 +16,6 @@ git clone https://github.com/Kuzan19/Table_test
 
 ```
 python -m venv venv
-sourse venv/bin/activate
 ```
 
 3. Установите зависимости.
